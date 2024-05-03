@@ -1,0 +1,61 @@
+// Define variables for colors
+$primary-color: #550066;
+$secondary-color: #fff;
+$background-color: #f0f0f0;
+$card-color: #f9f9f9;
+
+// Define mixin for box-shadow
+@mixin box-shadow($x, $y, $blur, $color) {
+    box-shadow: $x $y $blur $color;
+}
+
+// Reset default margin and padding
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Apply styles to body
+body {
+    font-family: Arial, sans-serif;
+    background-color: $background-color;
+}
+
+// Apply styles to header
+header {
+    background-color: $primary-color;
+    color: $secondary-color;
+    padding: 20px;
+    text-align: center;
+}
+
+// Apply styles to main content
+main {
+    padding: 20px;
+}
+
+// Apply styles to section
+section {
+    background-color: $secondary-color;
+    border-radius: 10px;
+    @include box-shadow(0, 2px, 4px, rgba(0, 0, 0, 0.1));
+    padding: 20px;
+    margin-bottom: 20px;
+
+    // Apply styles to launch card
+    .launch-card {
+        background-color: $card-color;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+// Apply styles to footer
+footer {
+    background-color: $primary-color;
+    color: $secondary-color;
+    text-align: center;
+    padding: 10px 0;
+}
