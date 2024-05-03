@@ -2,7 +2,7 @@
 $primary-color: #550066;
 $secondary-color: #fff;
 $background-color: #f0f0f0;
-$card-color: #f9f9f9;
+$card-color: #950b67;
 
 // Define mixin for box-shadow
 @mixin box-shadow($x, $y, $blur, $color) {
@@ -33,6 +33,32 @@ header {
 // Apply styles to main content
 main {
     padding: 20px;
+
+    .details-btn {
+        background-color: #a7006f;
+        border: 2px solid #000;
+        color: #f0f0f0;
+        font-size: .8rem;
+        padding: .5rem 2rem;
+        cursor: pointer;
+    }
+    .close-btn {
+        background-color: #a7006f;
+        border: 2px solid #000;
+        color: #f0f0f0;
+        font-size: .8rem;
+        padding: .5rem 2rem;
+        cursor: pointer;
+    }
+
+    #sortByDate, #sortByFlight, #sortByName{
+        background-color: #a7006f;
+        border: 1px solid #550066;
+        color: #000;
+        font-size: .5rem;
+        padding: .5rem 1rem;
+        cursor: pointer;
+    }
 }
 
 // Apply styles to section
@@ -50,6 +76,67 @@ section {
         padding: 10px;
         margin-bottom: 10px;
     }
+
+    /* Style for launch list */
+#launchList {
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-between;
+    list-style: none;
+    padding: 0;
+}
+
+/* Style for launch item */
+.launch-item {
+    width: 20%;
+    margin-bottom: 20px;
+    border: 1px solid #a7006f;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 2, 3);
+}
+
+/* Style for launch item cells */
+.launch-item > * {
+    padding: 10px;
+    border-bottom: 1px solid #a7006f;
+}
+
+/* Style for launch details modal */
+#launchDetailsModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Style for launch details modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* Style for close button in modal */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 }
 
 // Apply styles to footer

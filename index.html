@@ -10,23 +10,32 @@
     <header>
         <h1>SpaceX Launches</h1>
     </header>
+
     <main>
+        <!-- Sorting buttons -->
+        <div id="sortingButtons">
+            <button id="sortByDate">Sort by Launch Date</button>
+            <button id="sortByFlight">Sort by Flight Number</button>
+            <button id="sortByName">Sort by Name</button>
+        </div>
         <section id="launchList">
             <!-- Launches will be dynamically inserted here -->
         </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 SpaceX Data Representation Project</p>
-    </footer>
 
-    <div id="launchDetailsModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="launchDetails">
-                <!-- Launch details will be dynamically inserted here -->
+        <div id="launchDetailsModal" class="modal">
+            <h2>Launch Details</h2>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="launchDetails">
+                    <!-- Launch details will be dynamically inserted here -->
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SpaceX Data Representation Test Project by TadiwaMenace</p>
+    </footer>
 
     <script src="./js/script.js"></script>
 </body>

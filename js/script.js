@@ -1,11 +1,11 @@
-// Function to fetch past launches from the SpaceX API
-async function fetchPastLaunches() {
+// Function to fetch launches from the SpaceX API
+async function fetchLaunches() {
     try {
-        const response = await fetch("https://api.spacexdata.com/v4/launches/past");
+        const response = await fetch("https://api.spacexdata.com/v4/launches");
         const data = await response.json();
-        return data; // Return the array of past launches
+        return data; // Return the array of launches
     } catch (error) {
-        console.error("Error fetching past launches:", error);
+        console.error("Error fetching launches:", error);
         return []; // Return an empty array if there's an error
     }
 }
@@ -23,6 +23,7 @@ function displayLaunches(launches) {
             <h2>${launch.name}</h2>
             <p>Flight Number: ${launch.flight_number}</p>
             <p>Launch Date: ${new Date(launch.date_utc).toLocaleDateString()}</p>
+            <img src="${launch.links.patch.small}" alt="${launch.name} Patch">
             <button class="details-btn" data-launch-id="${launch.id}">View Details</button>
         `;
         launchList.appendChild(launchItem);
@@ -64,6 +65,7 @@ function displayLaunchDetails(launch) {
         <p>${launch.details}</p>
         <p>Flight Number: ${launch.flight_number}</p>
         <p>Launch Date: ${new Date(launch.date_utc).toLocaleDateString()}</p>
+        <img src="${launch.links.patch.small}" alt="${launch.name} Patch">
         <button class="close-btn">Close</button>
     `;
     launchDetails.appendChild(launchItem);
@@ -75,10 +77,55 @@ function displayLaunchDetails(launch) {
     });
 }
 
+// Function to sort launches by launch date
+function sortByLaunchDate(launches) {
+    return launches.sort((a, b) => new Date(a.date_utc) - new Date(b.date_utc));
+}
+
+// Function to sort launches by flight number
+function sortByFlightNumber(launches) {
+    return launches.sort((a, b) => a.flight_number - b.flight_number);
+}
+
+// Function to sort launches by name
+function sortByName(launches) {
+    return launches.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// Function to initialize sorting buttons
+function initializeSorting() {
+    const sortByDateButton = document.getElementById("sortByDate");
+    const sortByFlightButton = document.getElementById("sortByFlight");
+    const sortByNameButton = document.getElementById("sortByName");
+
+    sortByDateButton.addEventListener("click", () => {
+        launches(sortByLaunchDate(launches));
+    });
+
+    sortByFlightButton.addEventListener("click", () => {
+        launches(sortByFlightNumber(launches));
+    });
+
+    sortByNameButton.addEventListener("click", () => {
+        launches(sortByName(launches));
+    });
+}
+
 // Function to initialize the application
 async function initialize() {
-    const pastLaunches = await fetchPastLaunches();
-    displayLaunches(pastLaunches);
+    const launches = await fetchLaunches();
+
+    // Initialize sorting buttons
+    initializeSorting();
+
+    // Display launches sorted by launch date by default
+    displayLaunches(sortByLaunchDate(launches));
+}
+
+// Function to initialize the application
+async function initialize() {
+    const launches = await fetchLaunches();
+    displayLaunches(launches);
 }
 
 // Call the initialize function when the page loads

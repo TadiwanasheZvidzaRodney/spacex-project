@@ -19,6 +19,30 @@ header {
 main {
   padding: 20px;
 }
+main .details-btn {
+  background-color: #a7006f;
+  border: 2px solid #000;
+  color: #f0f0f0;
+  font-size: 0.8rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+main .close-btn {
+  background-color: #a7006f;
+  border: 2px solid #000;
+  color: #f0f0f0;
+  font-size: 0.8rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+main #sortByDate, main #sortByFlight, main #sortByName {
+  background-color: #a7006f;
+  border: 1px solid #550066;
+  color: #000;
+  font-size: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
 
 section {
   background-color: #fff;
@@ -26,12 +50,65 @@ section {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
+  /* Style for launch list */
+  /* Style for launch item */
+  /* Style for launch item cells */
+  /* Style for launch details modal */
+  /* Style for launch details modal content */
+  /* Style for close button in modal */
 }
 section .launch-card {
-  background-color: #f9f9f9;
+  background-color: #950b67;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+}
+section #launchList {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+}
+section .launch-item {
+  width: 20%;
+  margin-bottom: 20px;
+  border: 1px solid #a7006f;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(0, 0, 2);
+}
+section .launch-item > * {
+  padding: 10px;
+  border-bottom: 1px solid #a7006f;
+}
+section #launchDetailsModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+section .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+section .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+section .close:hover,
+section .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 footer {
