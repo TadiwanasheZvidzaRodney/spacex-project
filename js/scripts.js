@@ -1,14 +1,9 @@
-// Function to fetch past launches from the SpaceX API
-async function fetchPastLaunches() {
-    try {
-        const response = await fetch("https://api.spacexdata.com/v4/launches/past");
-        const data = await response.json();
-        return data; // Return the array of past launches
-    } catch (error) {
-        console.error("Error fetching past launches:", error);
-        return []; // Return an empty array if there's an error
-    }
-}
+// Sample launch data (replace with actual data)
+const launches = [
+    { flightNumber: 1, name: "Falcon 1", launchDate: "2006-03-24", details: "Sample details for Falcon 1." },
+    { flightNumber: 2, name: "Falcon 9 Flight 1", launchDate: "2010-06-04", details: "Sample details for Falcon 9 Flight 1." },
+    // Add more launch data here
+];
 
 // Function to display launches
 function displayLaunches(launches) {
@@ -21,32 +16,20 @@ function displayLaunches(launches) {
         launchItem.classList.add("launch-item");
         launchItem.innerHTML = `
             <h2>${launch.name}</h2>
-            <p>Flight Number: ${launch.flight_number}</p>
-            <p>Launch Date: ${new Date(launch.date_utc).toLocaleDateString()}</p>
-            <button class="details-btn" data-launch-id="${launch.id}">View Details</button>
+            <p>Flight Number: ${launch.flightNumber}</p>
+            <p>Launch Date: ${launch.launchDate}</p>
+            <button class="details-btn">View Details</button>
         `;
         launchList.appendChild(launchItem);
     });
 
     // Add event listeners to launch items for showing details
     const detailsButtons = document.querySelectorAll(".details-btn");
-    detailsButtons.forEach(button => {
+    detailsButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
-            const launchId = button.getAttribute("data-launch-id");
-            fetchLaunchDetails(launchId);
+            displayLaunchDetails(launches[index]);
         });
     });
-}
-
-// Function to fetch and display launch details
-async function fetchLaunchDetails(launchId) {
-    try {
-        const response = await fetch(`https://api.spacexdata.com/v4/launches/${launchId}`);
-        const launch = await response.json();
-        displayLaunchDetails(launch);
-    } catch (error) {
-        console.error("Error fetching launch details:", error);
-    }
 }
 
 // Function to display launch details
@@ -62,8 +45,8 @@ function displayLaunchDetails(launch) {
     launchItem.innerHTML = `
         <h2>${launch.name}</h2>
         <p>${launch.details}</p>
-        <p>Flight Number: ${launch.flight_number}</p>
-        <p>Launch Date: ${new Date(launch.date_utc).toLocaleDateString()}</p>
+        <p>Flight Number: ${launch.flightNumber}</p>
+        <p>Launch Date: ${launch.launchDate}</p>
         <button class="close-btn">Close</button>
     `;
     launchDetails.appendChild(launchItem);
@@ -75,11 +58,23 @@ function displayLaunchDetails(launch) {
     });
 }
 
-// Function to initialize the application
-async function initialize() {
-    const pastLaunches = await fetchPastLaunches();
+// Functions to fetch data from the SpaceX APi
+async function fetchLaunches() {
+    try {
+        const response = await fetch("https://api.spacexdata.com/v4/launches/");
+        const data = await response.json();
+        return data; // Return the array of past launches
+    } catch (error) {
+        console.error("Error fetching launches:", error);
+        return []; // Return an empty array if there's an error
+    }
+}
+
+// Function to fetch and display past launches
+async function displayLaunches() {
+    const pastLaunches = await fetchLaunches();
     displayLaunches(pastLaunches);
 }
 
-// Call the initialize function when the page loads
-initialize();
+// Initial display of launches
+displayLaunches(launches);
